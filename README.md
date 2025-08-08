@@ -53,14 +53,6 @@ PORT=3000
 4. **Run the server:**
     npm run dev
 
-## Deployment & Testing
-The API is deployed and running on Render at:
-https://course-platform-api-8owy.onrender.com
-
-You can test all endpoints live using Postman or any HTTP client by replacing your local URLs with the above URL.
-
-Note: The first request after a period of inactivity might take a few seconds due to Render’s server cold start.
-
 ## Available endpoints:
 
 ## Auth
@@ -90,7 +82,7 @@ Note: The first request after a period of inactivity might take a few seconds du
 | PATCH  | /api/list/modify/:id                       | Modify a list's title or position           |
 | DELETE | /api/list/delete/:id                       | Delete a list from a board                  |
 
-## ✅ Task
+## Task
 
 | Method | Route                                      | Description                                             |
 |--------|---------------------------------------------|---------------------------------------------------------|
