@@ -9,11 +9,6 @@ exports.create = async(req, res) => {
     try {
         const {title, description} = req.body;
 
-        // Look for invalid info
-        if (!title || title.trim() === "" || !description || description.trim() === ""){
-            return res.status(400).json({message: 'Invalid information'});
-        }
-
         // Create and board
         const board = new Board({
             title,
@@ -38,11 +33,6 @@ exports.create = async(req, res) => {
 // Add member
 exports.invite = async (req, res) => {
     try {
-        const { email } = req.body.email?.trim().toLowerCase();
-
-        if (!email || email.trim() === ""){
-            return res.status(400).json({message: 'Invalid email'});
-        }
         const member = await User.findOne({email: req.body.email});
         const board = await Board.findById(req.params.id);
 
@@ -64,7 +54,7 @@ exports.invite = async (req, res) => {
 
         res.status(200).json({
             message: 'User invited successfully',
-            userInvited: member,
+            userInvited: member._id,
             board,
         });
     } catch (err) {
@@ -102,6 +92,10 @@ exports.findBoard = async (req, res) => {
     try {
         const board = await Board.findById(req.params.id);
 
+        if (!board){
+            return res.status(404).json({message: 'Board not found'});
+        }
+        
         res.status(200).json({
             message: 'Board found successfully',
             board,
@@ -121,8 +115,6 @@ exports.modify = async (req, res) => {
         if (req.body.members || req.body.teacher){
             return res.status(400).json({message: 'Cannot modify members or teacher'});
         }
-
-        if (title?.trim() === "") return res.status(400).json({message: 'Invalid title'});
 
         // Update board
         const boardToModify = await Board.findByIdAndUpdate(

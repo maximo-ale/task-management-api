@@ -2,25 +2,49 @@
 
 This is a full-featured RESTful API for managing boards, lists, and tasks—similar to Trello. Built with Node.js, Express, MongoDB, and Mongoose, it includes user authentication with JWT and access control for private boards.
 
+## Quick Start
+
+1. Clone the repository
+- git clone https://github.com/maximo-ale/task-management-api.git
+- cd task-management-api
+
+2. Install dependencies
+- npm install
+
+3. Copy '.env.example' to '.env'
+- On Windows CMD:
+copy .env.example .env
+- On Windows PowerShell:
+Copy-Item .env.example .env
+- On Linux/macOS:
+cp .env.example .env
+
+4. The '.env' file already includes a test user and a public database:
+- PORT=3000
+- MONGO_URI=mongodb+srv://testUser:testPassword@cluster.uzqisyr.mongodb.net/?
+- JWT_SECRET=JWT_example
+
+4. Start the server
+- npm start
+
 ## Features
 
 - User registration and login with JWT
 - Create and manage boards, lists (columns), and tasks
-- Role-based access: board owners vs members
+- Role-based access: board owners and members
 - Assign users to tasks
 - Move tasks between lists
-- Filter tasks by state, due date, tags, or assigned user
-- Invite users to boards (simulated)
-
----
+- Filter tasks by state, tags, or assigned user
+- Invite users to boards
 
 ## Technologies
 
-- Node.js + Express
+- Node.js
+- Express
 - MongoDB + Mongoose
 - JWT for authentication
+- bcrypt
 - Postman (for manual testing)
-- Render (for deployment)
 
 ## Proyect Structure
 
@@ -33,25 +57,6 @@ This is a full-featured RESTful API for managing boards, lists, and tasks—simi
 - Utils
 - server.js
 - .env (ignored)
-
-## How to Run Locally
-
-1. **Clone the repository:**
-    ```bash
-    git clone https://github.com/maximo-ale/task-managment-api---
-    cd your-repo-name
-
-2. **Install dependencies:**
-    npm install
-
-3. **Set environment variables:**
-Create a .env file with the following:
-MONGODB_URI=<your_mongo_uri>
-JWT_SECRET=<your_secret_key>
-PORT=3000
-
-4. **Run the server:**
-    npm run dev
 
 ## Available endpoints:
 
@@ -95,8 +100,6 @@ PORT=3000
 
 ## Notes:
 Users can only be assigned to tasks if they are part of the board.
-
-Board invitations are simulated (no emails sent).
 
 Lists and tasks cannot be moved across boards.
 

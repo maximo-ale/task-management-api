@@ -13,7 +13,6 @@ const taskSchema = new Schema({
         enum: ['to-do', 'in-progress', 'done'],
         default: 'to-do',
     },
-    dueDate: Date,
     tags: [String],
     list: {
         type: Schema.Types.ObjectId,

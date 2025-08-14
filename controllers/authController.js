@@ -7,10 +7,6 @@ exports.register = async (req, res) => {
     try {
         const {name, email, password} = req.body;
 
-        if (!name || name.trim() === "" || !email || email.trim() === "" || !password || password.trim() === ""){
-            return res.status(400).json({message: 'Invalid given information'});
-        }
-
         // Hash password to protect sensitive info
         const hashedPassword = await bcrypt.hash(password, 10);
         
@@ -46,8 +42,8 @@ exports.login = async (req, res) => {
     try {
         const {name, email, password} = req.body;
 
-        if (!name && !email || !password || password.trim() === ""){
-            return res.status(400).json({message: 'Invalid fields'});
+        if (!name && !email){
+            return res.status(400).json({message: 'At least name or email must be provided'});
         }
 
         const user = await User.findOne({

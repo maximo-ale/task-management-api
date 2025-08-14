@@ -41,8 +41,8 @@ exports.createTask = async (req, res) => {
         const {title, description, status, dueDate, tags, assignedTo} = req.body;
         const list = req.list;
 
-        if (!title || title.trim() === "" || !list){
-            return res.status(400).json({message: 'Missing mandatory fields'});
+        if (!list){
+            return res.status(400).json({message: 'List is mandatory'});
         }
 
         const possibleTitle = await Task.findOne({title, list});
@@ -58,7 +58,7 @@ exports.createTask = async (req, res) => {
             tags,
             list,
             board: list.board,
-            assignedTo
+            assignedTo,
         });
 
         await newTask.save();
@@ -76,6 +76,7 @@ exports.createTask = async (req, res) => {
 exports.modifyTask = async (req, res) => {
     try {
         const {title, description, status, tags, assignedTo, list} = req.body;
+
         if (assignedTo) {
             return res.status(400).json({message: 'Cannot assign task to someone here'});
         }
@@ -87,18 +88,6 @@ exports.modifyTask = async (req, res) => {
         const possibleTitle = await Task.findOne(title, req.task.list);
         if (possibleTitle && !possibleTitle.equals(req.task._id)){
             return res.status(400).json({message: 'Task title must be unique'});
-        }
-
-        if (title?.trim() === ""){
-            return res.status(400).json({message: 'Invalid info'});
-        }
-
-        if (status !== 'to-do' && status !== 'in-progress' && status !== 'done'){
-            return res.status(400).json({message: 'Invalid status value'});
-        }
-
-        if (dueDate && isNaN(new Date(dueDate))){
-            return res.status(400).json({message: 'Invalid due date'});
         }
 
         const task = await Task.findByIdAndUpdate(

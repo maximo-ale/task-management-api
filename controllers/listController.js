@@ -31,14 +31,6 @@ exports.createList = async (req, res) => {
             return res.status(400).json({message: 'Title must be unique'});
         }
 
-        if (!title || title.trim() === ""){
-            return res.status(400).json({message: 'Title cannot be empty'});
-        }
-
-        if (position && (typeof position !== 'number' || position < 0)){
-            return res.status(400).json({message: 'Invalid position'});
-        }
-
         const newList = new List({
             title,
             board: req.params.id,
@@ -59,12 +51,9 @@ exports.createList = async (req, res) => {
 // Modify list (only members)
 exports.modifyList = async (req, res) => {
     try {
-        const {title, board, position} = req.body;
+        const {title, board} = req.body;
         if (board) {
             return res.status(400).json({message: 'Cannot modify board'});
-        }
-        if (!title || title.trim() === "" || typeof position !== 'number' || position < 0){
-            return res.status(400).json({message: 'Invalid information'});
         }
 
         const possibleTitle = await List.findOne({title, board: board._id});
