@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const Board = require('../models/Board');
-const { member } = require('../controllers/boardController');
 const List = require('../models/List');
 const Task = require('../models/Task');
+const User = require('../models/User');
 
 const auth = async (req, res, next) => {
 
@@ -24,7 +24,7 @@ const auth = async (req, res, next) => {
         if (!userInDB){
             return res.status(403).json({message: 'Invalid token'});
         }
-        
+
         next();
     } catch {
         return res.status(403).json({message: 'Invalid token'});

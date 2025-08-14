@@ -8,7 +8,7 @@ const { validateRequest } = require('../middlewares/validateRequest');
 router.post('/register',
     body('name').isString().withMessage('Name must be a string').bail().trim().notEmpty().withMessage('Invalid name'),
     body('email').isEmail().normalizeEmail().withMessage('Invalid email'),
-    body('password').isString().withMessage('Password must be a string').bail().trim().isLength({min: 5}).withMessage('Password must be at least 4 characters long'),
+    body('password').isString().withMessage('Password must be a string').bail().trim().isLength({min: 5}).withMessage('Password must be at least 5 characters long'),
     validateRequest , register);
 
 router.post('/login',
