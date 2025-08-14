@@ -5,7 +5,7 @@ const { member } = require('../controllers/boardController');
 const List = require('../models/List');
 const Task = require('../models/Task');
 
-const auth = (req, res, next) => {
+const auth = async (req, res, next) => {
 
     // Get token from header
     const token = req.header('Authorization')?.split(' ')[1];
@@ -18,6 +18,13 @@ const auth = (req, res, next) => {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         req.user = decoded;
         req.userId = decoded.userId;
+
+        // Only users from the DB
+        const userInDB = await User.findById(decoded.userId);
+        if (!userInDB){
+            return res.status(403).json({message: 'Invalid token'});
+        }
+        
         next();
     } catch {
         return res.status(403).json({message: 'Invalid token'});
