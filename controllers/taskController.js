@@ -75,7 +75,7 @@ exports.createTask = async (req, res) => {
 
 exports.modifyTask = async (req, res) => {
     try {
-        const {title, description, status, tags, assignedTo, list} = req.body;
+        const {title, assignedTo, list} = req.body;
 
         if (assignedTo) {
             return res.status(400).json({message: 'Cannot assign task to someone here'});
@@ -85,8 +85,8 @@ exports.modifyTask = async (req, res) => {
             return res.status(400).json({message: 'Cannot modify list of the task'});
         }
 
-        const possibleTitle = await Task.findOne(title, req.task.list);
-        if (possibleTitle && !possibleTitle.equals(req.task._id)){
+        const possibleTitle = await Task.findOne({title, list: req.task.list});
+        if (possibleTitle && !possibleTitle._id.equals(req.task._id)){
             return res.status(400).json({message: 'Task title must be unique'});
         }
 

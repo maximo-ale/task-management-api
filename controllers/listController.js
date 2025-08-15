@@ -56,7 +56,7 @@ exports.modifyList = async (req, res) => {
             return res.status(400).json({message: 'Cannot modify board'});
         }
 
-        const possibleTitle = await List.findOne({title, board: board._id});
+        const possibleTitle = await List.findOne({title, board: req.board._id});
         if (possibleTitle){
             return res.status(400).json({message: 'Title must be unique'});
         }

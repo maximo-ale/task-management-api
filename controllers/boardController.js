@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const Board = require('../models/Board');
 const User = require('../models/User');
 const List = require('../models/List');
+const Task = require('../models/Task');
 
 // Create new board
 exports.create = async(req, res) => {
@@ -111,9 +112,9 @@ exports.modify = async (req, res) => {
     try {
         const {title} = req.body
 
-        // Prevent user from modifying members or teacher
-        if (req.body.members || req.body.teacher){
-            return res.status(400).json({message: 'Cannot modify members or teacher'});
+        // Prevent user from modifying members or owner
+        if (req.body.members || req.body.owner){
+            return res.status(400).json({message: 'Cannot modify members or owner'});
         }
 
         // Update board
@@ -146,8 +147,11 @@ exports.deleteBoard = async (req, res) => {
         const boardToDelete = await Board.findByIdAndDelete(req.params.id);
 
         // Delete lists and tasks
-        const deletedLists = await List.deleteMany({board: boardToDelete._id});
-        await Task.deleteMany({list: {$in: {deletedLists}}});
+        const listsToDelete = await List.find({board: boardToDelete._id});
+        const listIds = listsToDelete.map(l => l._id);
+
+        await List.deleteMany({board: boardToDelete._id});
+        await Task.deleteMany({list: {$in: listIds}});
 
         res.status(200).json({
             message: 'Board deleted successfully',

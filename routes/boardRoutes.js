@@ -14,7 +14,7 @@ router.post('/create',
 router.post('/invite/:id',
     param('id').isMongoId().withMessage('Invalid ID'),
     body('email').isEmail().normalizeEmail().withMessage('Invalid email'),
-    validateRequest, auth, invite); // id: board
+    validateRequest, auth, onlyOwner, invite); // id: board
 
 router.get('/member',
     validateRequest, auth, member);
