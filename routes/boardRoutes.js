@@ -17,7 +17,6 @@ router.post('/invite/:id',
     validateRequest, auth, invite); // id: board
 
 router.get('/member',
-    param('id').isMongoId().withMessage('Invalid ID'),
     validateRequest, auth, member);
 
 router.get('/findBoard/:id',
