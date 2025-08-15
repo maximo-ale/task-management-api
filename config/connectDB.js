@@ -6,7 +6,7 @@ const connectDB = async () => {
     try {
         await mongoose.connect(process.env.MONGO_URI);
         
-        if (process.env.RESET_DB_ON_START){
+        if (process.env.RESET_DB_ON_START?.toLowerCase === 'true'){
             await resetDB();
         }
 
