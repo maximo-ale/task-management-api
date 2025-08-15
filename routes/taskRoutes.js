@@ -1,7 +1,6 @@
 const express = require('express');
 const {getTasks, createTask, modifyTask, assignUser, deleteTask, moveTask} = require('../controllers/taskController');
 const { auth, isMember } = require('../middlewares/authMiddleware');
-const idValidator = require('../middlewares/idValidator');
 const router = express.Router();
 
 const { body, param, query } = require('express-validator');
