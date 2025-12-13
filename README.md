@@ -19,7 +19,7 @@ Copy-Item .env.example .env
 - On Linux/macOS:
 cp .env.example .env
 
-4. The '.env' file already includes a test user and a public database:
+The '.env' file already includes a test user and a public database:
 - PORT=3000
 - MONGO_URI=mongodb+srv://testUser:testPassword@cluster.uzqisyr.mongodb.net/?
 - JWT_SECRET=JWT_example
@@ -48,7 +48,7 @@ This ensures each recruiter or tester starts with a clean environment.
 - Role-based access: board owners and members
 - Assign users to tasks
 - Move tasks between lists
-- Filter tasks by state, tags, or assigned user
+- Filter tasks by status, tags, or assigned user
 - Invite users to boards
 
 ## Technologies
@@ -117,7 +117,7 @@ Users can only be assigned to tasks if they are part of the board.
 
 Lists and tasks cannot be moved across boards.
 
-Task filtering via query parameters (e.g. /task/find/:id?state=done&tags=urgent).
+Task filtering via query parameters (e.g. /task/find/:taskId?status=done&tags=urgent).
 
 ## Author
 Developed by Máximo Ale.

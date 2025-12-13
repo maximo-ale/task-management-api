@@ -1,0 +1,38 @@
+export class AppError extends Error{
+    public statusCode: number;
+
+    constructor(statusCode: number, message: string){
+        super(message);
+        this.statusCode = statusCode;
+    }
+}
+
+export class BadRequestError extends AppError{
+    constructor(message = 'Bad request'){
+        super(400, message);
+    }
+}
+
+export class NotFoundError extends AppError{
+    constructor(message = 'Not found'){
+        super(404, message);
+    }
+}
+
+export class InvalidTokenError extends AppError{
+    constructor(message = 'Invalid token'){
+        super(401, message);
+    }
+}
+
+export class ForbiddenError extends AppError{
+    constructor(message = 'Forbidden'){
+        super(403, message);
+    }
+}
+
+export class ConflictError extends AppError{
+    constructor(message = 'Conflict'){
+        super(409, message);
+    }
+}
