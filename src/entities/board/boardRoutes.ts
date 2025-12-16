@@ -1,7 +1,6 @@
 import express from 'express';
 const router = express.Router();
 
-import { body, param, query } from 'express-validator';
 import controller from './boardController.js';
 
 import { auth, onlyOwner, isMember } from '../../middlewares/authMiddleware.js';

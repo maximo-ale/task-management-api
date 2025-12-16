@@ -1,24 +1,8 @@
 import Membership from './Membership.js';
 
-interface ProtectedUserInfo{
-    id: string,
-    name: string,
-}
-
-interface PartialBoardInfo{
-    id: string,
-    title: string,
-}
-
-interface BoardPopulated{
-    _id: string,
-    title: string,
-}
-
-interface UserPopulated{
-    _id: string,
-    name: string,
-}
+// Interfaces
+import { PartialBoardInfo, BoardPopulated } from '../board/boardInterface.js';
+import { UserPopulated, ProtectedUserInfo } from './membershipInterfaces.js';
 
 class MembershipRepository{
     async addMembership(userId: string, boardId: string){

@@ -2,25 +2,7 @@ import { BadRequestError, NotFoundError } from '../../utils/errors.js';
 import taskDB from '../task/taskRepository.js';
 import listDB from './listRepository.js';
 
-interface CreateList{
-    title: string,
-}
-
-interface UpdateList{
-    title?: string,
-    board?: string,
-}
-
-interface FullListInfo{
-    id: string,
-    title: string,
-    boardId: string,
-}
-
-interface PartialCourseInfo{
-    id: string,
-    title: string,
-}
+import { FullListInfo, CreateList, UpdateList, PartialCourseInfo } from './listInterface.js';
 
 class ListService{
     async getBoardLists(boardId: string): Promise<PartialCourseInfo[]>{

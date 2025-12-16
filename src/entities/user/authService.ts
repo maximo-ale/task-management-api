@@ -1,22 +1,11 @@
 import bcrypt from 'bcrypt';
 import authDB from './authRepository.js';
 import generateToken from '../../utils/generateToken.js';
-import { BadRequestError, InvalidTokenError, NotFoundError } from '../../utils/errors.js';
-interface RegisterUser{
-    name: string,
-    email: string,
-    password: string,
-}
+import { InvalidTokenError, NotFoundError } from '../../utils/errors.js';
 
-interface LoginUser{
-    name?: string,
-    email?: string,
-    password: string,
-}
-interface ProtectedUserInfo{
-    id: string,
-    name: string,
-}
+// Interfaces
+import { RegisterUser, ProtectedUserInfo, LoginUser} from './userInterface.js';
+
 class UserService{
     async register(data: RegisterUser): Promise<ProtectedUserInfo>{
         const {name, email, password} = data;

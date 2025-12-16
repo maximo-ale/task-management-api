@@ -1,11 +1,8 @@
-import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 
 import type { Request, Response, NextFunction } from 'express';
 
 import Board from '../entities/board/Board.js';
-import List from  '../entities/list/List.js';
-import Task from  '../entities/task/Task.js';
 import User from  '../entities/user/User.js';
 
 interface JwtPayload{

@@ -1,17 +1,7 @@
 import List from './List.js';
-interface CreateList{
-    title: string,
-}
 
-interface UpdateList{
-    title?: string,
-}
-
-interface FullListInfo{
-    id: string,
-    title: string,
-    boardId: string,
-}
+// Interfaces
+import { FullListInfo, CreateList, UpdateList } from './listInterface.js';
 
 class ListRepository{
     async getListById(listId: string): Promise<FullListInfo | null>{

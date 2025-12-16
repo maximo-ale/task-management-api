@@ -1,21 +1,7 @@
 import Board from './Board.js';
-interface CreateBoard{
-    title: string,
-    description: string,
-    owner: string,
-}
 
-interface UpdateBoard{
-    title?: string,
-    description?: string,
-}
-
-interface FullBoardInfo{
-    id: string,
-    title: string,
-    description: string,
-    owner: string,
-}
+// Interfaces
+import { FullBoardInfo, CreateBoard, UpdateBoard } from './boardInterface.js';
 
 class BoardRepository{
     async findBoardById(boardId: string): Promise<FullBoardInfo | null>{

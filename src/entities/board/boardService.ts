@@ -5,36 +5,17 @@ import taskDB from '../task/taskRepository.js';
 import authDB from '../user/authRepository.js';
 import boardDB from './boardRepository.js';
 
-interface CreateBoard{
-    title: string,
-    description?: string,
-}
-
-interface UpdateBoard{
-    title?: string,
-    description?: string,
-    owner?: string,
-}
-
-interface FullBoardInfo{
-    id: string,
-    title: string,
-    description: string,
-    owner: string,
-}
-
-interface PartialBoardInfo{
-    id: string,
-    title: string,
-}
-
-interface ProtectedUserInfo{
-    id: string,
-    name: string,
-}
+// Interfaces
+import {
+    FullBoardInfo,
+    CreateBoardService,
+    UpdateBoard,
+    ProtectedUserInfo,
+    PartialBoardInfo
+} from './boardInterface.js';
 
 class BoardService{
-    async createBoard(userId: string, data: CreateBoard): Promise<FullBoardInfo>{
+    async createBoard(userId: string, data: CreateBoardService): Promise<FullBoardInfo>{
         const {title, description} = data;
 
         // Create and board
