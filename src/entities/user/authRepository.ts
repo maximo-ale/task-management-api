@@ -1,20 +1,8 @@
 import User from './User.js';
 
-interface RegisterUser{
-    name: string,
-    email: string,
-    password: string,
-}
+// Interfaces
+import { RegisterUser, ProtectedUserInfo, LoginInfo } from './userInterface.js';
 
-interface ProtectedUserInfo{
-    id: string,
-    name: string,
-}
-
-interface LoginInfo{
-    id: string,
-    password: string,
-}
 class AuthRepository{
     async registerUser(data: RegisterUser): Promise<ProtectedUserInfo>{
         const newUser = new User(data);

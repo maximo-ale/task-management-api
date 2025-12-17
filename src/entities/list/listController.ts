@@ -1,6 +1,5 @@
 import listService from './listService.js';
 import type { Request, Response } from 'express';
-import List from './List.js';
 
 class ListController{
     // Get all lists from a board

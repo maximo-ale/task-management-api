@@ -2,52 +2,16 @@ import listDB from '../list/listRepository.js';
 import authDB from '../user/authRepository.js';
 import taskDB from './taskRepository.js';
 import { BadRequestError, NotFoundError } from '../../utils/errors.js';
-interface CreateTask{
-    title: string,
-    description: string,
-    status: 'to-do' | 'in-progress' | 'done',
-    board: string,
-    list: string,
-    tags: string | string[],
-}
 
-interface UsersAssigned{
-    id: string,
-    title: string,
-    assignedTo: string[],
-}
-
-interface UpdateTask{
-    title?: string,
-    description?: string,
-    status?: 'to-do' | 'in-progress' | 'done',
-    assignedTo?: string,
-    list?: string,
-    tags?: string | string[],
-}
-
-interface FullTaskInfo{
-    id: string,
-    title: string,
-    description: string,
-    board: string,
-    list: string,
-    status: 'to-do' | 'in-progress' | 'done',
-    assignedTo: string[],
-    tags: string | string[],
-}
-
-interface PartialTaskInfo{
-    id: string,
-    title: string,
-}
-
-interface Filters{
-    title?: string,
-    status?: 'to-do' | 'in-progress' | 'done',
-    tags?: string[],
-    assignedTo?: string[],
-}
+// Interfaces
+import {
+    FullTaskInfo,
+    PartialTaskInfo,
+    Filters,
+    UpdateTask,
+    CreateTask,
+    UsersAssigned
+} from './taskInterface.js';
 
 class TaskService{
     async getTasks(boardId: string, filters: Filters): Promise<PartialTaskInfo[]>{
@@ -60,7 +24,7 @@ class TaskService{
             filter.tags = tagArray;
         };
 
-        const tasks = await taskDB.getTasks({board: boardId, ...filter});
+        const tasks = await taskDB.getTasks(boardId, filter);
 
         return tasks;
     }
